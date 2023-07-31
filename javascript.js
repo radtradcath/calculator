@@ -1,6 +1,7 @@
 let num_a;
 let num_b;
 let opr;
+let result;
 
 
 const add = function (firstNum, secondNum) {
@@ -9,54 +10,94 @@ const add = function (firstNum, secondNum) {
 };
 
 const subtract = function (firstNum, secondNum) {
-    return firstNum - secondNum;
+    return +firstNum - +secondNum;
 
 };
 
 const multiply = function (firstNum, secondNum) {
-    return firstNum * secondNum;
+    return +firstNum * +secondNum;
 
 };
 
 const divide = function (firstNum, secondNum) {
-    return firstNum / secondNum;
+    return +firstNum / +secondNum;
 
 };
 
 let operate = function (a, opr, b) {
     switch (opr) {
         case '+':
-            console.log(add(a, b));
+           result = add(a, b);
             break;
 
         case "-":
-            console.log(subtract(a, b));
+            result = subtract(a, b);
             break;
 
         case '*':
-            console.log(multiply(a, b));
+            result = multiply(a, b);
             break;
 
         case '/':
-            console.log(divide(a, b));
+            result = divide(a, b);
             break;
 
         default:
-            console.log("Input a valid operation");
+            return "Input a valid operation";
     }
 }
 
-const numAndOperators = document.querySelector('#calc-numbop');
-let columnContainer = document.createElement('div');
-let button = document.createElement('div');
+const btns = document.querySelectorAll('button');
+const numBtns = document.querySelectorAll('.number');
+const oprBtns = document.querySelectorAll('.operator');
+const display = document.querySelector('#calc-display');
+let currentDisplay;
+let inputArr = [];
 
-for (i = 1; i <= 4; i++) {
-    columnContainer = document.createElement('div');
-    columnContainer.classList.add('button-container');
-    numAndOperators.appendChild(columnContainer);
-    for (j = 1; j <= 4; j++) {
-        button = document.createElement('div');
-        button.classList.add('button');
-        columnContainer.appendChild(button);
+btns.forEach(btn => {
+    if (btn.getAttribute('class') === 'number') {
+        btn.addEventListener('click', () => {
+            display.textContent += btn.textContent;
+            currentDisplay = display.textContent;
+
+        })
+    } else if (btn.getAttribute('class') === 'operator') {
+        btn.addEventListener('click', () => {
+            inputArr.push(currentDisplay);
+            display.textContent = '';
+            switch (btn.textContent) {
+                case '+':
+                    inputArr.push('+');
+                    break;
+                case '-':
+                    inputArr.push('-');
+                    break;
+                case '*':
+                    inputArr.push('*');
+                    break;
+                case '/':
+                    inputArr.push('/');
+                    break;
+                default:
+            }
+        })
+    } else if (btn.getAttribute('id') === 'eq') {
+        btn.addEventListener('click', () => {
+            inputArr.push(currentDisplay);            
+            // [1, +, 2, *, 3, / 5]
+            do {
+            operate(inputArr[0], inputArr[1], inputArr[2]); 
+            inputArr.shift();
+            inputArr.shift(); 
+            inputArr.shift();         
+            inputArr.unshift(result);
+            } while (inputArr.length > 1);
+            display.textContent = result;
+            currentDisplay = display.textContent;
+            inputArr = [];     
+             
+        })
     }
-}
+});
+
+

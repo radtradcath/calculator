@@ -20,6 +20,9 @@ body {
     flex: 1;
 }
 #calc-display {
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
     height: 150px;
     border: 1px solid red;
 }
@@ -50,8 +53,11 @@ body {
     flex: 1;
 }
 
-.button {
+button {
+    display: flex;
     flex: 1;
     border: 1px solid red;
+    justify-content: center;
+    align-items: center;
 }
 
