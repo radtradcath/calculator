@@ -103,7 +103,14 @@ btns.forEach(btn => {
             display.textContent = '';
             
         }) 
-    } 
+    } else if (btn.getAttribute('id') === 'del') {
+        btn.addEventListener('click', () => {
+            let displayArr = display.textContent.split("");
+            displayArr.pop();
+            display.textContent = displayArr.join("");
+            
+        }) 
+    }; 
 });
 
 
