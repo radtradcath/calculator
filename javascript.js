@@ -86,6 +86,9 @@ btns.forEach(btn => {
         });
     } else if (btn.getAttribute('id') === 'eq') {
         btn.addEventListener('click', () => {
+            if (display.textContent == "") {
+                return void(0);
+            }
             inputArr.push(currentDisplay);            
             // [1, +, 2, *, 3, / 5]
             do {
