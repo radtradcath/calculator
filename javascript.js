@@ -63,7 +63,7 @@ btns.forEach(btn => {
         });
     } else if (btn.getAttribute('class') === 'operator') {
         btn.addEventListener('click', () => {
-            if (inputArr[inputArr.length-1] == '+' || inputArr[inputArr.length-1] == '-' || inputArr[inputArr.length-1] == '*' || inputArr[inputArr.length-1] == '/') {
+            if (inputArr[inputArr.length-1] == '+' || inputArr[inputArr.length-1] == '-' || inputArr[inputArr.length-1] == '*' || inputArr[inputArr.length-1] == '/' || display.textContent == '') {
                 return void(0);
             }
             inputArr.push(currentDisplay);
