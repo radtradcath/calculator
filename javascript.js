@@ -60,9 +60,12 @@ btns.forEach(btn => {
             display.textContent += btn.textContent;
             currentDisplay = display.textContent;
 
-        })
+        });
     } else if (btn.getAttribute('class') === 'operator') {
         btn.addEventListener('click', () => {
+            if (inputArr[inputArr.length-1] == '+' || inputArr[inputArr.length-1] == '-' || inputArr[inputArr.length-1] == '*' || inputArr[inputArr.length-1] == '/') {
+                return void(0);
+            }
             inputArr.push(currentDisplay);
             display.textContent = '';
             switch (btn.textContent) {
@@ -80,7 +83,7 @@ btns.forEach(btn => {
                     break;
                 default:
             }
-        })
+        });
     } else if (btn.getAttribute('id') === 'eq') {
         btn.addEventListener('click', () => {
             inputArr.push(currentDisplay);            
@@ -96,13 +99,13 @@ btns.forEach(btn => {
             currentDisplay = display.textContent;
             inputArr = [];     
              
-        })
+        });
     } else if (btn.getAttribute('id') === 'clear') {
         btn.addEventListener('click', () => {
             inputArr = [];
             display.textContent = '';
             
-        }) 
+        });
     } else if (btn.getAttribute('id') === 'del') {
         btn.addEventListener('click', () => {
             let displayArr = display.textContent.split("");
