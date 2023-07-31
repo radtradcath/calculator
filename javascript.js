@@ -97,7 +97,13 @@ btns.forEach(btn => {
             inputArr = [];     
              
         })
-    }
+    } else if (btn.getAttribute('id') === 'clear') {
+        btn.addEventListener('click', () => {
+            inputArr = [];
+            display.textContent = '';
+            
+        }) 
+    } 
 });
 
 
