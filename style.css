@@ -9,9 +9,11 @@ body {
 #calc-container {
     height: 750px;
     width: 600px;
-    border: 1px solid red;
+    border: 1px solid black;
+    border-radius: 15px;;
     display: flex;
     flex-direction: column;
+    background-color: rgb(155, 230, 152);
 }
 
 #calc-buttons {
@@ -23,40 +25,43 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: end;
-    height: 150px;
-    border: 1px solid red;
+    height: 200px;
+    font-size: 3.5em;
+    font-family: 'Archivo', 'Times New Roman', Times, serif;
 }
 
 #calc-eqdel {
     display: flex;
     height: 100px;
-    border: 1px solid red;
+    gap: 3px;
+    margin-bottom: 3px;
+    
 }
 
 #del,
 #eq {
     flex: 1;
     text-align: center;
-    border: 1px solid red;
+    
 }
 
 #calc-numbop {
     flex: 1;
     display: flex;
+    gap: 3px;
     
 }
 
 .button-container {
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     flex: 1;
+    gap: 3px;
 }
 
 button {
     display: flex;
     flex: 1;
-    border: 1px solid red;
     justify-content: center;
     align-items: center;
 }

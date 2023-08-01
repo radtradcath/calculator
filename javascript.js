@@ -61,7 +61,7 @@ btns.forEach(btn => {
     
 if (btn.getAttribute('class') === 'number') {
         btn.addEventListener('click', () => {            
-            if (display.textContent == 'Math Error') {
+            if (display.textContent == 'Math Error' || display.textContent.length > 15) {
                 return void(0);
             } else if (btn.getAttribute('id') === 'dot' && display.textContent.includes('.')) {
                 return void(0);
@@ -107,7 +107,7 @@ if (btn.getAttribute('class') === 'number') {
             inputArr.shift();         
             inputArr.unshift(result);
             } while (inputArr.length > 1);
-            display.textContent = result;
+            display.textContent = result.toFixed(8);
             currentDisplay = display.textContent;
             inputArr = [];     
              
