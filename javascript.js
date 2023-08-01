@@ -20,6 +20,9 @@ const multiply = function (firstNum, secondNum) {
 };
 
 const divide = function (firstNum, secondNum) {
+    if (secondNum == 0) {
+        return "Math Error"
+    }
     return +firstNum / +secondNum;
 
 };
@@ -55,15 +58,21 @@ let currentDisplay;
 let inputArr = [];
 
 btns.forEach(btn => {
-    if (btn.getAttribute('class') === 'number') {
-        btn.addEventListener('click', () => {
+    
+if (btn.getAttribute('class') === 'number') {
+        btn.addEventListener('click', () => {            
+            if (display.textContent == 'Math Error') {
+                return void(0);
+            } else if (btn.getAttribute('id') === 'dot' && display.textContent.includes('.')) {
+                return void(0);
+            }
             display.textContent += btn.textContent;
             currentDisplay = display.textContent;
 
         });
     } else if (btn.getAttribute('class') === 'operator') {
         btn.addEventListener('click', () => {
-            if (inputArr[inputArr.length-1] == '+' || inputArr[inputArr.length-1] == '-' || inputArr[inputArr.length-1] == '*' || inputArr[inputArr.length-1] == '/' || display.textContent == '') {
+            if (inputArr[inputArr.length-1] == '+' || inputArr[inputArr.length-1] == '-' || inputArr[inputArr.length-1] == '*' || inputArr[inputArr.length-1] == '/' || display.textContent == '' || display.textContent == 'Math Error') {
                 return void(0);
             }
             inputArr.push(currentDisplay);
@@ -86,7 +95,7 @@ btns.forEach(btn => {
         });
     } else if (btn.getAttribute('id') === 'eq') {
         btn.addEventListener('click', () => {
-            if (display.textContent == "") {
+            if (display.textContent == "" || display.textContent == 'Math Error') {
                 return void(0);
             }
             inputArr.push(currentDisplay);            
@@ -111,6 +120,9 @@ btns.forEach(btn => {
         });
     } else if (btn.getAttribute('id') === 'del') {
         btn.addEventListener('click', () => {
+            if (display.textContent == 'Math Error'){
+                return void(0);
+            }
             let displayArr = display.textContent.split("");
             displayArr.pop();
             display.textContent = displayArr.join("");
