@@ -62,7 +62,7 @@ if (btn.getAttribute('class') === 'number') {
             if (result == 'Math Error') {                     
             display.textContent = result;
             } else {
-            display.textContent = +result.toFixed(8);
+            display.textContent = +result.toFixed(5);
             
             }
             currentDisplay = display.textContent;

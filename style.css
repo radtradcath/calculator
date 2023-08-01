@@ -24,11 +24,14 @@ body {
 }
 #calc-display {
     display: flex;
-    justify-content: flex-end;
     align-items: end;
+    padding: 5px;
     height: 200px;
+    width: 586px;
     font-size: 3.5em;
     font-family: 'Archivo', 'Times New Roman', Times, serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #calc-eqdel {
@@ -70,6 +73,9 @@ body {
 }
 
 #display-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
     background-color: rgb(212, 233, 233);
     border: 2px solid black;
 }
@@ -90,4 +96,6 @@ button {
     margin-left: 8px;
     font-family: "Archivo", 'Times New Roman', Times, serif;
     font-size: 2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
