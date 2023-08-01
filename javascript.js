@@ -103,7 +103,7 @@ if (btn.getAttribute('class') === 'number') {
                 return void(0);
             }
             inputArr.push(currentDisplay);            
-            // [1, +, 2, *, 3, / 5]
+            calcArray.textContent = inputArr.join("");
             do {
             operate(inputArr[0], inputArr[1], inputArr[2]); 
             inputArr.shift();
@@ -121,6 +121,7 @@ if (btn.getAttribute('class') === 'number') {
             inputArr = [];
             display.textContent = '';
             calcArray.textContent = inputArr.join("");
+            clicked = false;
             
         });
     } else if (btn.getAttribute('id') === 'del') {
