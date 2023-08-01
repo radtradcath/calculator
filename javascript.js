@@ -21,7 +21,7 @@ const multiply = function (firstNum, secondNum) {
 
 const divide = function (firstNum, secondNum) {
     if (secondNum == 0) {
-        return "Math Error"
+        return "Math Error";
     }
     return +firstNum / +secondNum;
 
@@ -73,12 +73,12 @@ if (btn.getAttribute('class') === 'number') {
 
         });
     } else if (btn.getAttribute('class') === 'operator') {
-        btn.addEventListener('click', () => {
-            clicked = false;
-            inputArr.push(currentDisplay);            
+        btn.addEventListener('click', () => {                        
             if (inputArr[inputArr.length-1] == '+' || inputArr[inputArr.length-1] == '-' || inputArr[inputArr.length-1] == '*' || inputArr[inputArr.length-1] == '/' || display.textContent == '' || display.textContent == 'Math Error') {
                 return void(0);
             }
+            clicked = false;
+            inputArr.push(currentDisplay);
             display.textContent = '';            
             switch (btn.textContent) {
                 case '+':
@@ -102,16 +102,20 @@ if (btn.getAttribute('class') === 'number') {
             if (display.textContent == "" || display.textContent == 'Math Error' || inputArr.length < 2) {
                 return void(0);
             }
-            inputArr.push(currentDisplay);            
+            inputArr.push(currentDisplay);                     
             calcArray.textContent = inputArr.join("");
             do {
-            operate(inputArr[0], inputArr[1], inputArr[2]); 
+            operate(inputArr[0], inputArr[1], inputArr[2]);            
             inputArr.shift();
             inputArr.shift(); 
             inputArr.shift();         
             inputArr.unshift(result);
             } while (inputArr.length > 1);
+            if (result == 'Math Error') {                     
+            display.textContent = result;
+            } else {
             display.textContent = +result.toFixed(8);
+            }
             currentDisplay = display.textContent;
             inputArr = [];     
             clicked = true;
