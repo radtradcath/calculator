@@ -54,14 +54,16 @@ const btns = document.querySelectorAll('button');
 const numBtns = document.querySelectorAll('.number');
 const oprBtns = document.querySelectorAll('.operator');
 const display = document.querySelector('#calc-display');
+const calcArray = document.querySelector('#calc-array');
 let currentDisplay;
 let inputArr = [];
+let clicked = false;
 
 btns.forEach(btn => {
     
 if (btn.getAttribute('class') === 'number') {
         btn.addEventListener('click', () => {            
-            if (display.textContent == 'Math Error' || display.textContent.length > 15) {
+            if (display.textContent == 'Math Error' || display.textContent.length > 15 || clicked == true) {
                 return void(0);
             } else if (btn.getAttribute('id') === 'dot' && display.textContent.includes('.')) {
                 return void(0);
@@ -72,11 +74,12 @@ if (btn.getAttribute('class') === 'number') {
         });
     } else if (btn.getAttribute('class') === 'operator') {
         btn.addEventListener('click', () => {
+            clicked = false;
+            inputArr.push(currentDisplay);            
             if (inputArr[inputArr.length-1] == '+' || inputArr[inputArr.length-1] == '-' || inputArr[inputArr.length-1] == '*' || inputArr[inputArr.length-1] == '/' || display.textContent == '' || display.textContent == 'Math Error') {
                 return void(0);
             }
-            inputArr.push(currentDisplay);
-            display.textContent = '';
+            display.textContent = '';            
             switch (btn.textContent) {
                 case '+':
                     inputArr.push('+');
@@ -90,12 +93,13 @@ if (btn.getAttribute('class') === 'number') {
                 case '/':
                     inputArr.push('/');
                     break;
-                default:
+                default:                    
             }
+            calcArray.textContent = inputArr.join("");
         });
     } else if (btn.getAttribute('id') === 'eq') {
         btn.addEventListener('click', () => {
-            if (display.textContent == "" || display.textContent == 'Math Error') {
+            if (display.textContent == "" || display.textContent == 'Math Error' || inputArr.length < 2) {
                 return void(0);
             }
             inputArr.push(currentDisplay);            
@@ -107,25 +111,27 @@ if (btn.getAttribute('class') === 'number') {
             inputArr.shift();         
             inputArr.unshift(result);
             } while (inputArr.length > 1);
-            display.textContent = result.toFixed(8);
+            display.textContent = +result.toFixed(8);
             currentDisplay = display.textContent;
             inputArr = [];     
-             
+            clicked = true;
         });
     } else if (btn.getAttribute('id') === 'clear') {
         btn.addEventListener('click', () => {
             inputArr = [];
             display.textContent = '';
+            calcArray.textContent = inputArr.join("");
             
         });
     } else if (btn.getAttribute('id') === 'del') {
         btn.addEventListener('click', () => {
-            if (display.textContent == 'Math Error'){
+            if (display.textContent == 'Math Error' || clicked == true){
                 return void(0);
             }
             let displayArr = display.textContent.split("");
             displayArr.pop();
             display.textContent = displayArr.join("");
+            calcArray.textContent = inputArr.join("");
             
         }) 
     }; 
